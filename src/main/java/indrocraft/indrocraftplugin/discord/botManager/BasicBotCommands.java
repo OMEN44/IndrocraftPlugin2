@@ -22,11 +22,7 @@ public class BasicBotCommands extends ListenerAdapter {
     private final FileConfiguration r = new ConfigUtils(main, "rank.yml").getConfig();
     private final ConfigUtils config = new ConfigUtils(main, "config.yml");
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = new SQLUtils(config.getConfig().getString("database.database"),
-            config.getConfig().getString("database.host"),
-            config.getConfig().getString("database.port"),
-            config.getConfig().getString("database.user"),
-            config.getConfig().getString("database.password"));
+    private final SQLUtils sqlUtils = main.sqlUtils;
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {

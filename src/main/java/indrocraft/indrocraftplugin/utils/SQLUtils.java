@@ -53,16 +53,16 @@ public class SQLUtils {
         connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://"
-                            + host + ":" + port + "/" + database + "?useSSL=false"
-                    , username, password);
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database + "?allowPublicKeyRetrieval=true&useSSL=false",
+                    username,
+                    password);
         } catch (SQLException e) {
             printSQLException(e);
             return null;
-        }/* catch (CJCommunicationsException e) {
-            System.out.println();
-            return null;
-        }*/
+        }
+
+        Bukkit.getLogger().info("connected");
         return connection;
     }
 
@@ -285,7 +285,7 @@ public class SQLUtils {
         if (conn()) {return;}
         try {
             if (!columnExists(id, tableName)) {
-                PreparedStatement ps = conn.prepareStatement("ALTER TABLE " + tableName + " ADD " + id + " "
+                PreparedStatement ps = conn.prepareStatement("ALTER TABLE " + tableName + " ADD `" + id + "` "
                         + dataType + " NOT NULL");
                 ps.executeUpdate();
             }

@@ -23,11 +23,7 @@ public class Home implements TabExecutor {
     public String databaseName = config.getConfig().getString("databaseForTP");
 
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = new SQLUtils(config.getConfig().getString("database.database"),
-            config.getConfig().getString("database.host"),
-            config.getConfig().getString("database.port"),
-            config.getConfig().getString("database.user"),
-            config.getConfig().getString("database.password"));
+    private final SQLUtils sqlUtils = main.sqlUtils;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -56,7 +52,8 @@ public class Home implements TabExecutor {
                 } else if (playerLevel == 5) {
                     numOfHomes = 10;
                 }
-                if (sqlUtils.getString("nameColour", "UUID", uuid, "players").equalsIgnoreCase("gold")) {
+                if (sqlUtils.getString("nameColour", "UUID", uuid, "players")
+                        .equalsIgnoreCase("gold")) {
                     numOfHomes = numOfHomes + 2;
                 }
                 //gets number of homes using: pRank.getLevel()

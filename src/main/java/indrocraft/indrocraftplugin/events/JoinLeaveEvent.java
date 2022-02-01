@@ -23,11 +23,7 @@ public class JoinLeaveEvent implements Listener {
     ConfigUtils config = new ConfigUtils(main, "config.yml");
     ConfigUtils ranksConfig = new ConfigUtils(main, "rank.yml");
     RankUtils rankUtils = new RankUtils();
-    SQLUtils sqlUtils = new SQLUtils(config.getConfig().getString("database.database"),
-                config.getConfig().getString("database.host"),
-                config.getConfig().getString("database.port"),
-                config.getConfig().getString("database.user"),
-                config.getConfig().getString("database.password"));
+    SQLUtils sqlUtils = main.sqlUtils;
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -82,7 +78,7 @@ public class JoinLeaveEvent implements Listener {
 
         //load rank:
         if (ranksConfig.getConfig().getBoolean("useRanks")) {
-            sqlUtils.createColumn("`rank`", "VARCHAR(100)", "players");
+            sqlUtils.createColumn("rank", "VARCHAR(100)", "players");
             sqlUtils.createColumn("nameColour", "VARCHAR(100)", "players");
 
             List<String> defaultRank = new ArrayList<>(

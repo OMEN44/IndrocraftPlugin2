@@ -23,11 +23,7 @@ public class RankCommand implements TabExecutor {
     private final ConfigUtils configx = new ConfigUtils(main, "config.yml");
     private final FileConfiguration config = c.getConfig();
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = new SQLUtils(configx.getConfig().getString("database.database"),
-            configx.getConfig().getString("database.host"),
-            configx.getConfig().getString("database.port"),
-            configx.getConfig().getString("database.user"),
-            configx.getConfig().getString("database.password"));;
+    private final SQLUtils sqlUtils = main.sqlUtils;
     ChatColor red = ChatColor.RED;
 
     @Override

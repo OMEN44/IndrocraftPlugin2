@@ -16,11 +16,7 @@ import java.util.List;
 public class Warn implements TabExecutor {
 
     private final FileConfiguration c = new ConfigUtils(Main.getPlugin(Main.class), "config.yml").getConfig();
-    private final SQLUtils sqlUtils = new SQLUtils(c.getString("database.database"),
-            c.getString("database.host"),
-            c.getString("database.port"),
-            c.getString("database.user"),
-            c.getString("database.password"));
+    private final SQLUtils sqlUtils = Main.getPlugin(Main.class).sqlUtils;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
