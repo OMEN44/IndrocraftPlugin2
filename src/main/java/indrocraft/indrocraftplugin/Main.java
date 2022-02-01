@@ -8,7 +8,6 @@ import indrocraft.indrocraftplugin.utils.SQLUtils;
 import indrocraft.indrocraftplugin.events.JoinLeaveEvent;
 import indrocraft.indrocraftplugin.events.RankEvents;
 import indrocraft.indrocraftplugin.utils.RankUtils;
-import net.dv8tion.jda.api.JDA;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +31,7 @@ public final class Main extends JavaPlugin{
         warps.saveDefaultConfig();
 
         //initialize bot:
-        bot = new Bot("OTMxMjk5NjY0NTE3NTU4MzIy.YeCaZg._Bq7LeGLW_R5EjC8CAv6lFKCa20");
+        bot = new Bot("OTI2OTUzOTI3OTE0NzEzMTE4.YdDLHg.f3wegQXTSHLEs_SYu0U9ER6Iuvg");
 
         //init utils
         //sqlManager initializes connection with the database:
@@ -83,14 +82,7 @@ public final class Main extends JavaPlugin{
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        bot.getJda().shutdownNow();
-        while (bot.getJda().getStatus() != JDA.Status.SHUTDOWN) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        bot.shutdown();
         Bukkit.getLogger().info("Successfully disabled Indrocraft plugin!");
     }
 }
