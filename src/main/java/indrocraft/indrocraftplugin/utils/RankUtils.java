@@ -19,11 +19,6 @@ public class RankUtils {
 
     public ConfigUtils config = new ConfigUtils(main, "rank.yml");
 
-    public void levelUp(Player player, SQLUtils data, String newRank) {
-        setRank(player, data, newRank);
-        LoadRank(player, data);
-    }
-
     public int getLevel(Player player, SQLUtils data) {
         String rank = data.getString("rank", "UUID",player.getUniqueId().toString(), "players");
         String code = config.getConfig().getString("ranks." + rank + ".details.level");

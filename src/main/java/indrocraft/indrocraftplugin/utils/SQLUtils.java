@@ -113,7 +113,7 @@ public class SQLUtils {
     public void setData(String value, String idColumn, String id, String column, String tableName) {
         if (conn()) {return;}
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE " + tableName + " SET " + column + "=? WHERE "
+            PreparedStatement ps = conn.prepareStatement("UPDATE " + tableName + " SET `" + column + "`=? WHERE "
                     + idColumn + "=?");
             if (isNum("int", value)) {
                 int valNum = Integer.parseInt(value);
