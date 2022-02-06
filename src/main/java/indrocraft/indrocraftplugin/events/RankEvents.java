@@ -25,7 +25,7 @@ public class RankEvents implements Listener {
     private final ConfigUtils configx = new ConfigUtils(main, "config.yml");
     private final FileConfiguration config = c.getConfig();
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = main.sqlUtils;
+    SQLUtils sqlUtils = new SQLUtils(main.sqlconnector);
 
     @EventHandler
     public void advancementDoneEvent(PlayerAdvancementDoneEvent event) {

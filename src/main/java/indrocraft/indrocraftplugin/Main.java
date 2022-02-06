@@ -4,6 +4,7 @@ import indrocraft.indrocraftplugin.discord.Bot;
 import indrocraft.indrocraftplugin.discord.botManager.BotEventListener;
 import indrocraft.indrocraftplugin.commands.*;
 import indrocraft.indrocraftplugin.utils.ConfigUtils;
+import indrocraft.indrocraftplugin.utils.SQLConnector;
 import indrocraft.indrocraftplugin.utils.SQLUtils;
 import indrocraft.indrocraftplugin.events.JoinLeaveEvent;
 import indrocraft.indrocraftplugin.events.RankEvents;
@@ -15,9 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin{
 
-    public SQLUtils sqlUtils;
+    public SQLConnector sqlconnector;
     public RankUtils rankUtils;
     public Bot bot;
+    public SQLUtils sqlUtils;
 
     @Override
     public void onEnable() {
@@ -32,15 +34,18 @@ public final class Main extends JavaPlugin{
         warps.saveDefaultConfig();
 
         //initialize bot:
-        bot = new Bot("");
+        //bot = new Bot("OTMxMjk5NjY0NTE3NTU4MzIy.YeCaZg.unpR0-QGsytO3eS7fKUBnQ_w-PU");
 
         //init utils
         //sqlManager initializes connection with the database:
-        sqlUtils = new SQLUtils(config.getConfig().getString("database.database"),
+        sqlconnector = new SQLConnector(config.getConfig().getString("database.database"),
                 config.getConfig().getString("database.host"),
                 config.getConfig().getString("database.port"),
                 config.getConfig().getString("database.user"),
-                config.getConfig().getString("database.password"));
+                config.getConfig().getString("database.password"),
+                false,
+                this);
+        sqlUtils = new SQLUtils(sqlconnector);
         rankUtils = new RankUtils();
 
         // commands:
@@ -83,14 +88,14 @@ public final class Main extends JavaPlugin{
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        bot.getJda().shutdownNow();
+        /*bot.getJda().shutdownNow();
         while (bot.getJda().getStatus().equals(JDA.Status.SHUTTING_DOWN)) {
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         Bukkit.getLogger().info("Successfully disabled Indrocraft plugin!");
     }
 }

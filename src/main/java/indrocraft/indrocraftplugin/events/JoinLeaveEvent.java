@@ -23,7 +23,7 @@ public class JoinLeaveEvent implements Listener {
     ConfigUtils config = new ConfigUtils(main, "config.yml");
     ConfigUtils ranksConfig = new ConfigUtils(main, "rank.yml");
     RankUtils rankUtils = new RankUtils();
-    SQLUtils sqlUtils = main.sqlUtils;
+    SQLUtils sqlUtils = new SQLUtils(main.sqlconnector);
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

@@ -23,7 +23,7 @@ public class Home implements TabExecutor {
     public String databaseName = config.getConfig().getString("databaseForTP");
 
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = main.sqlUtils;
+    SQLUtils sqlUtils = new SQLUtils(main.sqlconnector);
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -170,7 +170,7 @@ public class Home implements TabExecutor {
                             currentNum--;
                             sqlUtils.setData(Integer.toString(currentNum), "UUID", uuid, databaseName +
                                     "num", "players");
-                            sqlUtils.remove("homeID", uuid + homeID, databaseName);
+                            sqlUtils.deleteRow("homeID", uuid + homeID, databaseName);
                             String hl = sqlUtils.getString(databaseName, "UUID", uuid,
                                     "players");
                             sqlUtils.setData(hl.replace(" " + homeID + " ", " "), "UUID",

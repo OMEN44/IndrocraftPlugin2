@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class BasicBotCommands extends ListenerAdapter {
@@ -21,7 +22,7 @@ public class BasicBotCommands extends ListenerAdapter {
     private final FileConfiguration r = new ConfigUtils(main, "rank.yml").getConfig();
     private final ConfigUtils config = new ConfigUtils(main, "config.yml");
     private final RankUtils rankUtils = new RankUtils();
-    private final SQLUtils sqlUtils = main.sqlUtils;
+    SQLUtils sqlUtils = new SQLUtils(main.sqlconnector);
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -36,7 +37,7 @@ public class BasicBotCommands extends ListenerAdapter {
                     event.getChannel().sendTyping().queue();
                     event.getMessage().reply("Pong!").queue();
                     break;
-                /*case "?user":
+                case "?user":
                     if (args.length == 1) {
                         event.getChannel().sendTyping().queue();
                         event.getMessage().reply("Silly goose, you have to put a Minecraft username after that one!").queue();
@@ -76,7 +77,7 @@ public class BasicBotCommands extends ListenerAdapter {
                             event.getMessage().reply("I wont fall for this trickery! That player doesnt exist.").queue();
                         }
                     }
-                    break;*/
+                    break;
                 case "?players":
                     StringBuilder result = new StringBuilder();
                     EmbedBuilder eb = new EmbedBuilder();
