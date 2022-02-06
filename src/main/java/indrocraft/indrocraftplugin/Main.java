@@ -89,7 +89,7 @@ public final class Main extends JavaPlugin{
     public void onDisable() {
         // Plugin shutdown logic
         /*bot.getJda().shutdownNow();
-        while (bot.getJda().getStatus().equals(JDA.Status.SHUTTING_DOWN)) {
+        while (bot.getJda().getStatus() != JDA.Status.SHUTTING_DOWN) {
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
